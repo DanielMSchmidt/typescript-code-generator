@@ -3,7 +3,7 @@ import path from "path";
 
 export const DEFAULT_CONFIG = `
 # Source files to be used for generation
-files: "src/**/*.ts",
+files: "src/**/*.ts"
 
 # Generated files
 generates:
