@@ -1,5 +1,5 @@
 {
-  "name": "@graphql-codegen/typeguards",
+  "name": "@typescript-codegen/typeguards",
   "version": "0.0.0",
   "description": "Generate type guards",
   "main": "dist/index.js",
