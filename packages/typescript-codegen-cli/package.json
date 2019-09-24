@@ -1,6 +1,6 @@
 {
   "name": "@typescript-codegen/cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Code generation for typescript types",
   "main": "dist/index.js",
   "scripts": {
@@ -15,11 +15,11 @@
   "author": "DanielMSchmidt<danielmschmidt92@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@typescript-codegen/typeguards": "*",
     "@types/glob": "^7.1.1",
     "@types/jest": "^24.0.15",
     "@types/node": "^12.0.10",
     "@types/yargs": "^13.0.0",
+    "@typescript-codegen/typeguards": "^0.1.1",
     "jest": "^24.8.0",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.3.0",

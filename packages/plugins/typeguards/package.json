@@ -1,6 +1,6 @@
 {
   "name": "@typescript-codegen/typeguards",
-  "version": "0.0.0",
+  "version": "0.1.1",
   "description": "Generate type guards",
   "main": "dist/index.js",
   "scripts": {
