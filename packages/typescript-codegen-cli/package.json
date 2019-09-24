@@ -1,12 +1,11 @@
 {
-  "name": "typescript-codegen",
+  "name": "@typescript-codegen/cli",
   "version": "0.0.0",
   "description": "Code generation for typescript types",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "start": "ts-node src/index.ts",
-    "release": "semantic-release",
     "test": "jest"
   },
   "husky": {
