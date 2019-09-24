@@ -8,11 +8,6 @@
     "start": "ts-node src/index.ts",
     "test": "jest"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
-  },
   "keywords": [
     "typescript",
     "code-generation"
@@ -24,11 +19,8 @@
     "@types/jest": "^24.0.15",
     "@types/node": "^12.0.10",
     "@types/yargs": "^13.0.0",
-    "husky": "^2.5.0",
+    "@graphql-codegen/typeguards": "*",
     "jest": "^24.8.0",
-    "prettier": "^1.18.2",
-    "pretty-quick": "^1.11.1",
-    "semantic-release": "^15.13.17",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.2"

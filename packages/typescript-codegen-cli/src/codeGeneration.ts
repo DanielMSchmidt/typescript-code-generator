@@ -1,10 +1,10 @@
 import { readSync as readYaml } from "node-yaml";
 import path from "path";
+import { readFileSync } from "fs";
 import { sync as globSync } from "glob";
 import { parse } from "@babel/parser";
 import traverse, { NodePath } from "@babel/traverse";
 import * as t from "@babel/types";
-import { readFileSync } from "fs";
 
 type TypeDefinition = t.TSInterfaceDeclaration | t.TSTypeAliasDeclaration;
 type TypeDefinitionPath = NodePath<TypeDefinition>;
