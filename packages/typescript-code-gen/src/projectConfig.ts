@@ -14,7 +14,7 @@ generates:
             # Plugin that creates ducktyping type guards
             - typeguards
         # You need to write a // @ts-gen typeguards comment to into this file
-        # keyword: typeguard # default
+        keyword: typeguards
 `;
 
 export default function createProjectConfig() {
