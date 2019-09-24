@@ -1,22 +1,23 @@
 import codeGeneration from "../codeGeneration";
+import { readFileSync } from "fs";
+import { resolve } from "path";
 
 jest.mock("node-yaml", () => ({
   readSync: () => ({
-    files: "fixtures/**/*.ts",
+    files: "./src/fixtures/**/*.ts",
     generates: {
-      "./fixtures/generated.ts": {
-        plugins: ["typeguard"]
+      "./src/generated/typeguards.ts": {
+        plugins: ["typeguards"]
       }
     }
   })
 }));
 
-jest.mock("ts-codegen-typeguard", () => () => {
-  return [];
-});
-
 describe("Code Generation", () => {
   it("runs all specified code generators on all files", () => {
     codeGeneration();
+    expect(
+      readFileSync(resolve(__dirname, "../generated/typeguards.ts"), "utf-8")
+    ).toMatchInlineSnapshot(`""`);
   });
 });

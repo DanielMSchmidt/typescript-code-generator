@@ -1,10 +1,11 @@
 import { readSync as readYaml } from "node-yaml";
-import path from "path";
-import { readFileSync } from "fs";
+import path, { resolve } from "path";
+import { readFileSync, fstat, writeFileSync, unlinkSync } from "fs";
 import { sync as globSync } from "glob";
 import { parse } from "@babel/parser";
 import traverse, { NodePath } from "@babel/traverse";
 import * as t from "@babel/types";
+import generate from "@babel/generator";
 
 type TypeDefinition = t.TSInterfaceDeclaration | t.TSTypeAliasDeclaration;
 type TypeDefinitionPath = NodePath<TypeDefinition>;
@@ -58,21 +59,32 @@ export default function codeGeneration() {
     );
 
   // For each output
-  Object.entries(config.generates).forEach(([_outDir, outputConfig]) => {
+  Object.entries(config.generates).forEach(([outFilePath, outputConfig]) => {
+    const absolutOutPath = resolve(__dirname, "..", outFilePath);
+    // Clear output path
+    try {
+      unlinkSync(absolutOutPath);
+    } catch (e) {}
+
     // => Filter by leading comment === this keyword
     const applicableTypeDefs = typeDefinitions.filter(path =>
       commentIncludes((outputConfig as any).keyword, path)
     );
 
     // => gather babel asts from plugins
-    const pluginOutputAsts = (outputConfig as any).plugins.map(
-      (pluginName: string) => {
+    const pluginOutputAsts = (outputConfig as any).plugins.reduce(
+      (carry: string[], pluginName: string) => {
         // => require plugin
-        const plugin = require("ts-codegen-" + pluginName);
+        const plugin = require("@typescript-codegen/" + pluginName);
         // => invoke plugin with type definitions
-        return plugin(outputConfig, applicableTypeDefs);
-      }
+        return [...carry, ...plugin(outputConfig, applicableTypeDefs)];
+      },
+      []
     );
+
+    // => generate
+    const codeStrings = pluginOutputAsts.map((ast: any) => generate(ast));
+    const code = codeStrings.join("\n");
+    writeFileSync(absolutOutPath, code, "utf-8");
   });
-  // => generate
 }

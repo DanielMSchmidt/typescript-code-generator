@@ -1,0 +1,13 @@
+# Source files to be used for generation
+files: "src/**/*.ts"
+
+# Generated files
+generates:
+  # File to be generated
+  ./src/generated.ts:
+    # Plugins to be used for generation
+    plugins:
+      # Plugin that creates ducktyping type guards
+      - typeguards
+    # You need to write a // @ts-gen typeguards comment to into this file
+    keyword: typeguards

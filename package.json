@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "lerna bootstrap",
+    "build": "lerna run build",
+    "pretest": "npm run build",
     "test": "lerna run test",
     "release": "lerna version --conventional-commits -m 'chore(release): publish [skip ci]' --create-release github -y"
   },
