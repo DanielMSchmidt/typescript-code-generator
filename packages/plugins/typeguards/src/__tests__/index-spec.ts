@@ -4,6 +4,7 @@ import * as t from "@babel/types";
 
 const plugin = require("../");
 
+// TODO: move into a testing plugin
 const runPlugin = (typeDefs: string): string => {
   const ast = parse(typeDefs, {
     sourceType: "unambiguous",
@@ -20,11 +21,53 @@ const runPlugin = (typeDefs: string): string => {
 };
 
 describe("typeguards", () => {
-  it("creates type guard for a simple type", () => {
-    expect(
-      runPlugin(`
-      type myString = string
-    `)
-    ).toMatchInlineSnapshot(`"type myString = string;"`);
+  describe("simple types", () => {
+    it("guards string type", () => {
+      expect(
+        runPlugin(`
+        type myString = string
+      `)
+      ).toMatchInlineSnapshot(`
+        "function isMyString(input: unknown): input is myString {
+          if (typeof input !== \\"string\\") {
+            return false;
+          }
+
+          return true;
+        }"
+      `);
+    });
+
+    it("guards number type", () => {
+      expect(
+        runPlugin(`
+        type myNumber = number
+      `)
+      ).toMatchInlineSnapshot(`
+        "function isMyNumber(input: unknown): input is myNumber {
+          if (typeof input !== \\"number\\") {
+            return false;
+          }
+
+          return true;
+        }"
+      `);
+    });
+
+    it("guards boolean type", () => {
+      expect(
+        runPlugin(`
+        type myBool = boolean
+      `)
+      ).toMatchInlineSnapshot(`
+        "function isMyBool(input: unknown): input is myBool {
+          if (typeof input !== \\"boolean\\") {
+            return false;
+          }
+
+          return true;
+        }"
+      `);
+    });
   });
 });
