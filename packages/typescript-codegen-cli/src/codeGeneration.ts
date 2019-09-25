@@ -83,7 +83,9 @@ export default function codeGeneration() {
     );
 
     // => generate
-    const codeStrings = pluginOutputAsts.map((ast: any) => generate(ast));
+    const codeStrings = pluginOutputAsts.map(
+      (ast: any) => generate(ast.node).code
+    );
     const code = codeStrings.join("\n");
     writeFileSync(absolutOutPath, code, "utf-8");
   });
