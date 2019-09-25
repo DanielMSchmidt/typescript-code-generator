@@ -70,4 +70,20 @@ describe("typeguards", () => {
       `);
     });
   });
+
+  describe("advanced types", () => {
+    it.todo("guards enums of simple types");
+    it.todo("guards arrays of simple types");
+    it.todo("guards simple objects");
+    it.todo("guards multi-level objects");
+  });
+
+  describe("complex types", () => {
+    it.todo("guards specific generics");
+  });
+
+  describe("challenges", () => {
+    it.todo("guards open generics");
+    it.todo("guards referenced types");
+  });
 });
